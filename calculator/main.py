@@ -1,52 +1,70 @@
-# Daniel Lehman
-# Lisette Spalding
+# MADE BY: Lisette Spalding & Daniel Lehman
+# FILE NAME: tkinter_starter_template.py
+# DATE CREATED: 02/11/2021
+# DATE LAST MODIFIED: 02/11/2021
 
+###### IMPORTS ######
 from tkinter import *
-#from tkinter.ttk import *
+######## FIN ########
 
+##### CONSTANTS #####
+HEIGHT = 200
+WIDTH = 200
+TITLE = "New Program"
+BACKGROUND = "darkgrey"
+FONT = "San_Serif"
+######## FIN ########
 
-
+######## CLASS #######
 class App(Frame):
+    """ To use: App(root)
+        This is the App class, this class creates the application. """
     def __init__(self, master):
-        super().__init__(master)
-        self.indexs = [0, 0, 0, 1, 1, 1, 2, 2, 2]
-        self.grid()
-        self.pack()
-        self.create_widgets()
+        """ To Use: You don't.
+         This is the "in it" function. This function determines the constant variables in this class."""
+        super(App, self).__init__(master)
+        self.create()
 
-    #add widgets
-    def create_widgets(self):
-        self.screen = Label(self, bg="gray")
-        for i in range(9):
-            self.bttn = Button(self, text=f"{i+1}", bg="orange", command=self.handle_click)
-            self.bttn.grid(row=self.indexs[i], column=i % 3)
-            self.bttn0 = Button(self, text="0", bg="orange", command=self.handle_click)
-            self.addbttn = Button(self, text="+", bg="orange", command=self.opp_click)
-            self.subbttn = Button(self, text="-", bg="orange", command=self.opp_click)
-            self.multbttn = Button(self, text="x", bg="orange", command=self.opp_click)
+    def create(self):
+        """ To use: self.create()
+         This is the create function, it creates the app widgets."""
+        #### !! Operation Buttons !! ####
+        multiplyBttn = Button(self, text="×", command=multiply)
+        divideBttn = Button(self, text="÷", value="divide")
+        addBttn = Button(self, text="+", value="add")
+        subtractBttn = Button(self, text="-", value="subtract")
+        ###### !! Operation FIN !! ######
 
-            self.screen.grid(row=0, column=0, columnspan=3)
-            self.bttn0.grid(row=4, column=1)
-            self.addbttn.grid(row=2, column=3)
-            self.subbttn.grid(row=1, column=3)
-            self.multbttn.grid(row=0, column=3)
+        ###### !! Number Buttons !! #####
+        numBttn0 = Button(self, text="0", value=0)
+        numBttn1 = Button(self, text="1", value=1)
+        numBttn2 = Button(self, text="2", value=2)
+        numBttn3 = Button(self, text="3", value=3)
+        numBttn4 = Button(self, text="4", value=4)
+        numBttn5 = Button(self, text="5", value=5)
+        numBttn6 = Button(self, text="6", value=6)
+        numBttn7 = Button(self, text="7", value=7)
+        numBttn8 = Button(self, text="8", value=8)
+        numBttn9 = Button(self, text="9", value=9)
+        ####### !! Number FIN !! ########
 
-
-    def handle_click(self):
+    def multiply(self):
         pass
-
-    def opp_click(self):
-        pass
-
 
 
 def main():
+    # General Setup
     root = Tk()
-    root.title("Text Boxes")
-    root.geometry("300x250")
-    root.attributes("-fullscreen",False)
-    app = App(root)
+    root.geometry(str.format("{}x{}", WIDTH, HEIGHT))
+    root.title(TITLE)
 
-    root.mainloop()
+    ## Configurations ##
+    root.configure(bg=BACKGROUND)
+    ####### FIN ########
+
+    # Conjuring the App
+    app = App(root)
+    root.mainloop() # Running the loop
+######## FIN #########
 
 main()

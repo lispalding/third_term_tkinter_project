@@ -1,5 +1,5 @@
 # MADE BY: Lisette Spalding & Daniel Lehman
-# FILE NAME: tkinter_starter_template.py
+# PROJECT NAME: third_term_tkinter_project
 # DATE CREATED: 02/11/2021
 # DATE LAST MODIFIED: 03/03/2021
 # FILE NAME: calculator.py

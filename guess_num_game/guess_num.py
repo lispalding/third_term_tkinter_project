@@ -33,6 +33,7 @@ class App(Frame):
         self.maximumRange = 0
         self.guessNum = 0
         self.theNum = 0
+        self.guessCount = 0
 
         self.win = False
         ###### FINISHED #######
@@ -116,8 +117,6 @@ class App(Frame):
         self.mediumBttn.configure(state = DISABLED)
         self.hardBttn.configure(state = DISABLED)
 
-        return self.guessNum, self.theNum
-
     def medium(self):
         """ To use: self.medium()
         This is the Medium Difficulty function. It will determine how the game is played."""
@@ -131,8 +130,6 @@ class App(Frame):
         self.easyBttn.configure(state=DISABLED)
         self.mediumBttn.configure(state=DISABLED)
         self.hardBttn.configure(state=DISABLED)
-
-        return self.guessNum, self.theNum
 
     def hard(self):
         """ To use: self.hard()
@@ -148,29 +145,49 @@ class App(Frame):
         self.mediumBttn.configure(state=DISABLED)
         self.hardBttn.configure(state=DISABLED)
 
-        return self.guessNum, self.theNum
-
     def submitFunc(self):
-        self.guess = self.guessNum # Tying the guessNum variable to the self.guess variable\
+        self.guessCount += 1
 
+        # Tying the guessNum variable to the self.guess variable
+        guess = self.numEntry.get()
+        theNum = str(self.theNum)
 
-        if self.guess == self.theNum: # Saying that if the guess equals the determined number...
+        self.pastGuesses.insert(0.0, guess)
+
+        # Saying that if the guess equals the number, this will happen
+        if guess == theNum:
             mb.showinfo("You won!", "You won! Congratulations!")
-            self.play = mb.askquestion("Play Again?", "Would you like to play again?")
+            play = mb.askquestion("Play Again?", "Would you like to play again?")
 
-            if self.play == True:
+            if play == "yes":
                 self.easyBttn.configure(state = ACTIVE)
                 self.mediumBttn.configure(state = ACTIVE)
                 self.hardBttn.configure(state = ACTIVE)
 
-                self.pastGuesses.delete(0, "end")
+                # Deleting the text in the following:
+                self.pastGuesses.delete(0.0, END)
+                self.numEntry.delete(0, "end")
+
             else:
                 mb.showinfo("Goodbye!", "Goodbye then.")
                 self.quit()
-        elif self.guess > self.theNum:
-            mb.showinfo("Pertaining to your guess...", "Guess lower!")
-        else:
-            mb.showinfo("Pertaining to your guess...", "Guess higher!")
+
+        # Saying that if the guess is greater than the number, this will happen
+        elif guess > theNum:
+            if self.guessCount >= self.guessNum:
+                mb.showinfo("Your guess...", "Guess lower!")
+
+        # Saying that if the guess is something else, this will happen
+        elif guess < theNum:
+            if self.guessCount >= self.guessNum:
+                mb.showinfo("Your guess...", "Guess higher!")
+
+        if guess == "" or guess.isalpha():
+            self.pastGuesses.delete(0.0, END)
+            self.numEntry.delete(0, "end")
+            
+            mb.showinfo("PLEASE.", "Enter a number in the box. This will count against you.")
+            self.pastGuesses.insert(0.0, "Please enter a number in the box. This will count against you.")
 
 def main():
     # General Setup

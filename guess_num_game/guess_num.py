@@ -185,7 +185,7 @@ class App(Frame):
         if guess == "" or guess.isalpha():
             self.pastGuesses.delete(0.0, END)
             self.numEntry.delete(0, "end")
-            
+
             mb.showinfo("PLEASE.", "Enter a number in the box. This will count against you.")
             self.pastGuesses.insert(0.0, "Please enter a number in the box. This will count against you.")
 
